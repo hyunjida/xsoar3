@@ -1,0 +1,32 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "",
+	"feed": false,
+	"fromServerVersion": "",
+	"id": "c5f214db-7ccc-45aa-878a-fc4792e4bc58",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "",
+	"keyTypeMap": {},
+	"locked": false,
+	"logicalVersion": 0,
+	"mapping": null,
+	"name": "Hi",
+	"nameRaw": "Hi",
+	"packID": "",
+	"packName": "",
+	"propagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": false,
+	"toServerVersion": "",
+	"transformer": {},
+	"type": "classification",
+	"unclassifiedCases": null,
+	"version": -1
+}
