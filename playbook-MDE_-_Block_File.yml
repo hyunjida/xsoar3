@@ -1,0 +1,429 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.10.0
+    itemVersion: 1.16.29
+    packID: MicrosoftDefenderAdvancedThreatProtection
+    packName: Microsoft Defender for Endpoint
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: "This playbook receives an MD5 or a SHA256 hash and adds it to the block
+  list in Microsoft Defender for Endpoint. \nThe playbook uses the integration \"Microsoft
+  Defender for Endpoint\"."
+id: MDE - Block File
+inputs:
+- description: The severity of the malicious behavior identified by the data within
+    the indicator, where High is the most severe and Informational is not severe at
+    all.
+  key: 'Severity '
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: Brief description (100 characters or less) of the threat represented
+    by the indicator.
+  key: IndicatorDescription
+  playbookInputQuery: null
+  required: true
+  value:
+    simple: Added by Cortex XSOAR
+- description: The indicator alert title in Defender.
+  key: IndicatorTitle
+  playbookInputQuery: null
+  required: true
+  value:
+    simple: Added by Cortex XSOAR
+- description: Whether to generate an alert or not. The default is true.
+  key: GenerateAlert
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "true"
+- description: In this input you can insert either MD5 or SHA256 to block.
+  key: Hash
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: MDE - Block File
+outputs: []
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2301242c-19a0-41b2-8906-2a58c726a8ff
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 2301242c-19a0-41b2-8906-2a58c726a8ff
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "6"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      brandname:
+        simple: Microsoft Defender Advanced Threat Protection
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Returns 'yes' if the integration brand is available. Otherwise
+        returns 'no'.
+      id: 237b291c-f8aa-4623-8f96-99c0376eedb5
+      iscommand: false
+      name: Is Microsoft Defender for Endpoint is enable?
+      script: IsIntegrationAvailable
+      type: condition
+      version: -1
+    taskid: 237b291c-f8aa-4623-8f96-99c0376eedb5
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 180
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 32e7827d-3a6f-4154-8ef5-6e3a0d20a518
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 32e7827d-3a6f-4154-8ef5-6e3a0d20a518
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 910
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: Block
+      generate_alert:
+        complex:
+          root: inputs.GenerateAlert
+      indicator_description:
+        complex:
+          root: inputs.IndicatorDescription
+      indicator_title:
+        complex:
+          root: inputs.IndicatorTitle
+      indicator_type:
+        simple: FileSha256
+      indicator_value:
+        complex:
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: inputs.SHA256
+              operator: stringHasLength
+              right:
+                value:
+                  simple: "64"
+          root: inputs.SHA256
+          transformers:
+          - operator: uniq
+      severity:
+        complex:
+          root: 'inputs.Severity '
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Creates a new indicator.
+      id: ae03f7d2-a316-4255-83fb-87c50a8281fc
+      iscommand: true
+      name: Block Indicators by SHA256
+      script: '|||microsoft-atp-sc-indicator-create'
+      type: regular
+      version: -1
+    taskid: ae03f7d2-a316-4255-83fb-87c50a8281fc
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1310,
+          "y": 730
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: Block
+      generate_alert:
+        complex:
+          root: inputs.GenerateAlert
+      indicator_description:
+        complex:
+          root: inputs.IndicatorDescription
+      indicator_title:
+        complex:
+          root: inputs.IndicatorTitle
+      indicator_type:
+        simple: FileMd5
+      indicator_value:
+        complex:
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: inputs.MD5
+              operator: stringHasLength
+              right:
+                value:
+                  simple: "32"
+          root: inputs.MD5
+          transformers:
+          - operator: uniq
+      severity:
+        complex:
+          root: 'inputs.Severity '
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Creates a new indicator.
+      id: a42d4ac7-6f1d-4481-8b8d-869e76b71de9
+      iscommand: true
+      name: Block Indicators by MD5
+      script: '|||microsoft-atp-sc-indicator-create'
+      type: regular
+      version: -1
+    taskid: a42d4ac7-6f1d-4481-8b8d-869e76b71de9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 890,
+          "y": 730
+        }
+      }
+  "6":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.Hash
+          operator: isNotEmpty
+          right:
+            value: {}
+      label: "yes"
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "7"
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: aeda8e30-f52c-4e9d-8f10-67e049054750
+      iscommand: false
+      name: Is there any file to block?
+      type: condition
+      version: -1
+    taskid: aeda8e30-f52c-4e9d-8f10-67e049054750
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 700,
+          "y": 350
+        }
+      }
+  "7":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.Hash
+                transformers:
+                - operator: uniq
+          operator: stringHasLength
+          right:
+            value:
+              simple: "32"
+      label: "yes"
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4b1ab765-8f50-44ab-8f68-1649fec5095c
+      iscommand: false
+      name: Has MD5 hashes?
+      type: condition
+      version: -1
+    taskid: 4b1ab765-8f50-44ab-8f68-1649fec5095c
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 890,
+          "y": 535
+        }
+      }
+  "8":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.Hash
+                transformers:
+                - operator: uniq
+          operator: stringHasLength
+          right:
+            value:
+              simple: "64"
+      label: "yes"
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 3d4dde8d-e1ec-4712-8a31-b18d40635b1f
+      iscommand: false
+      name: Has SHA256 hashes?
+      type: condition
+      version: -1
+    taskid: 3d4dde8d-e1ec-4712-8a31-b18d40635b1f
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1310,
+          "y": 535
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "1_3_#default#": 0.42,
+      "6_3_#default#": 0.32,
+      "6_7_yes": 0.54,
+      "6_8_yes": 0.62,
+      "7_3_#default#": 0.43,
+      "8_3_#default#": 0.17
+    },
+    "paper": {
+      "dimensions": {
+        "height": 925,
+        "width": 1240,
+        "x": 450,
+        "y": 50
+      }
+    }
+  }
