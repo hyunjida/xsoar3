@@ -1,0 +1,209 @@
+{
+	"cacheVersn": 0,
+	"definitionId": "",
+	"fromDate": "0001-01-01T00:00:00Z",
+	"fromDateLicense": "0001-01-01T00:00:00Z",
+	"fromServerVersion": "",
+	"hidePivot": false,
+	"hideSearch": false,
+	"id": "4ef41ee0-1aa5-4775-844a-a8583bfbffc7",
+	"isCommon": true,
+	"itemVersion": "",
+	"layout": [
+		{
+			"forceRange": false,
+			"h": 2,
+			"i": "e2307e90-ea7b-11ee-ace1-0be912d16c92",
+			"id": "e2307e90-ea7b-11ee-ace1-0be912d16c92",
+			"reflectDimensions": true,
+			"w": 2,
+			"widget": {
+				"Cache": null,
+				"cacheVersn": 0,
+				"category": "",
+				"commitMessage": "",
+				"created": "2024-03-25T14:36:41.245649089+09:00",
+				"dataType": "incidents",
+				"dateRange": {
+					"fromDate": "0001-01-01T00:00:00Z",
+					"fromDateLicense": "0001-01-01T00:00:00Z",
+					"period": {
+						"by": "",
+						"byFrom": "days",
+						"byTo": "",
+						"field": "",
+						"fromValue": 7,
+						"toValue": null
+					},
+					"toDate": "0001-01-01T00:00:00Z"
+				},
+				"definitionId": "",
+				"fromServerVersion": "5.0.0",
+				"id": "active-incidents-by-severity",
+				"isPredefined": true,
+				"itemVersion": "1.2.48",
+				"modified": "2024-03-25T14:36:44.344003272+09:00",
+				"name": "Active Incidents - Pie chart",
+				"packID": "CommonWidgets",
+				"packName": "Common Widgets",
+				"packPropagationLabels": [
+					"all"
+				],
+				"params": {
+					"groupBy": [
+						"severity"
+					],
+					"showGraphValues": false
+				},
+				"prevName": "Active Incidents - Pie chart",
+				"propagationLabels": [],
+				"query": "-category:job and -status:archived and -status:closed",
+				"shouldCommit": false,
+				"sizeInBytes": 0,
+				"toServerVersion": "",
+				"vcShouldIgnore": false,
+				"vcShouldKeepItemLegacyProdMachine": false,
+				"version": 1,
+				"widgetType": "pie"
+			},
+			"x": 0,
+			"y": 0
+		},
+		{
+			"forceRange": false,
+			"h": 2,
+			"i": "e2d9b6e0-ea7b-11ee-ace1-0be912d16c92",
+			"id": "e2d9b6e0-ea7b-11ee-ace1-0be912d16c92",
+			"reflectDimensions": true,
+			"w": 2,
+			"widget": {
+				"Cache": null,
+				"cacheVersn": 0,
+				"category": "",
+				"commitMessage": "",
+				"created": "2024-03-25T14:36:41.244186637+09:00",
+				"dataType": "incidents",
+				"dateRange": {
+					"fromDate": "0001-01-01T00:00:00Z",
+					"fromDateLicense": "0001-01-01T00:00:00Z",
+					"period": {
+						"by": "",
+						"byFrom": "days",
+						"byTo": "",
+						"field": "",
+						"fromValue": 7,
+						"toValue": null
+					},
+					"toDate": "0001-01-01T00:00:00Z"
+				},
+				"definitionId": "",
+				"fromServerVersion": "5.0.0",
+				"id": "incidents-assigned-by-user",
+				"isPredefined": true,
+				"itemVersion": "1.2.48",
+				"modified": "2024-03-25T14:36:44.343445565+09:00",
+				"name": "Active Incidents Assigned by User",
+				"packID": "CommonWidgets",
+				"packName": "Common Widgets",
+				"packPropagationLabels": [
+					"all"
+				],
+				"params": {
+					"groupBy": [
+						"owner"
+					]
+				},
+				"prevName": "Active Incidents Assigned by User",
+				"propagationLabels": [],
+				"query": "-category:job and -status:archived and -status:closed",
+				"shouldCommit": false,
+				"sizeInBytes": 0,
+				"toServerVersion": "",
+				"vcShouldIgnore": false,
+				"vcShouldKeepItemLegacyProdMachine": false,
+				"version": 1,
+				"widgetType": "bar"
+			},
+			"x": 2,
+			"y": 0
+		},
+		{
+			"forceRange": false,
+			"h": 3,
+			"i": "e39ae400-ea7b-11ee-ace1-0be912d16c92",
+			"id": "e39ae400-ea7b-11ee-ace1-0be912d16c92",
+			"reflectDimensions": true,
+			"w": 4,
+			"widget": {
+				"Cache": null,
+				"cacheVersn": 0,
+				"category": "",
+				"commitMessage": "",
+				"created": "2024-03-25T14:36:41.250041438+09:00",
+				"dataType": "incidents",
+				"dateRange": {
+					"fromDate": "0001-01-01T00:00:00Z",
+					"fromDateLicense": "0001-01-01T00:00:00Z",
+					"period": {
+						"by": "",
+						"byFrom": "days",
+						"byTo": "",
+						"field": "",
+						"fromValue": 7,
+						"toValue": null
+					},
+					"toDate": "0001-01-01T00:00:00Z"
+				},
+				"definitionId": "",
+				"fromServerVersion": "5.0.0",
+				"id": "active-incidents-by-type",
+				"isPredefined": true,
+				"itemVersion": "1.2.48",
+				"modified": "2024-03-25T14:36:44.345743711+09:00",
+				"name": "Active Incidents - Line chart",
+				"packID": "CommonWidgets",
+				"packName": "Common Widgets",
+				"packPropagationLabels": [
+					"all"
+				],
+				"params": {
+					"groupBy": [
+						"occurred(d)",
+						"rawType"
+					]
+				},
+				"prevName": "Active Incidents - Line chart",
+				"propagationLabels": [],
+				"query": "-category:job and -status:archived and -status:closed",
+				"shouldCommit": false,
+				"sizeInBytes": 0,
+				"toServerVersion": "",
+				"vcShouldIgnore": false,
+				"vcShouldKeepItemLegacyProdMachine": false,
+				"version": 1,
+				"widgetType": "line"
+			},
+			"x": 4,
+			"y": 0
+		}
+	],
+	"locked": false,
+	"modulePage": false,
+	"name": "c",
+	"owner": "",
+	"packID": "",
+	"packName": "",
+	"period": {
+		"by": "",
+		"byFrom": "days",
+		"byTo": "",
+		"field": "",
+		"fromValue": 7,
+		"toValue": null
+	},
+	"propagationLabels": [],
+	"system": false,
+	"toDate": "0001-01-01T00:00:00Z",
+	"toServerVersion": "",
+	"version": -1
+}
