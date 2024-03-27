@@ -1,0 +1,212 @@
+{
+	"cacheVersn": 0,
+	"definitionId": "",
+	"fromDate": "0001-01-01T00:00:00Z",
+	"fromDateLicense": "0001-01-01T00:00:00Z",
+	"fromServerVersion": "",
+	"hidePivot": false,
+	"hideSearch": false,
+	"id": "6b0e0476-2f69-4c24-8e16-285d14617d74",
+	"isCommon": true,
+	"itemVersion": "",
+	"layout": [
+		{
+			"forceRange": false,
+			"h": 2,
+			"i": "fee68020-ea7b-11ee-ace1-0be912d16c92",
+			"id": "fee68020-ea7b-11ee-ace1-0be912d16c92",
+			"reflectDimensions": true,
+			"w": 2,
+			"widget": {
+				"Cache": null,
+				"cacheVersn": 0,
+				"category": "",
+				"commitMessage": "",
+				"created": "2024-03-25T14:36:41.244186637+09:00",
+				"dataType": "incidents",
+				"dateRange": {
+					"fromDate": "0001-01-01T00:00:00Z",
+					"fromDateLicense": "0001-01-01T00:00:00Z",
+					"period": {
+						"by": "",
+						"byFrom": "days",
+						"byTo": "",
+						"field": "",
+						"fromValue": 7,
+						"toValue": null
+					},
+					"toDate": "0001-01-01T00:00:00Z"
+				},
+				"definitionId": "",
+				"fromServerVersion": "5.0.0",
+				"id": "incidents-assigned-by-user",
+				"isPredefined": true,
+				"itemVersion": "1.2.48",
+				"modified": "2024-03-25T14:36:44.343445565+09:00",
+				"name": "Active Incidents Assigned by User",
+				"packID": "CommonWidgets",
+				"packName": "Common Widgets",
+				"packPropagationLabels": [
+					"all"
+				],
+				"params": {
+					"groupBy": [
+						"owner"
+					]
+				},
+				"prevName": "Active Incidents Assigned by User",
+				"propagationLabels": [],
+				"query": "-category:job and -status:archived and -status:closed",
+				"shouldCommit": false,
+				"sizeInBytes": 0,
+				"toServerVersion": "",
+				"vcShouldIgnore": false,
+				"vcShouldKeepItemLegacyProdMachine": false,
+				"version": 1,
+				"widgetType": "bar"
+			},
+			"x": 0,
+			"y": 0
+		},
+		{
+			"forceRange": false,
+			"h": 2,
+			"i": "ff9c3b90-ea7b-11ee-ace1-0be912d16c92",
+			"id": "ff9c3b90-ea7b-11ee-ace1-0be912d16c92",
+			"reflectDimensions": true,
+			"w": 2,
+			"widget": {
+				"Cache": null,
+				"cacheVersn": 0,
+				"category": "",
+				"commitMessage": "",
+				"created": "2024-03-25T14:36:41.242462099+09:00",
+				"dataType": "incidents",
+				"dateRange": {
+					"fromDate": "0001-01-01T00:00:00Z",
+					"fromDateLicense": "0001-01-01T00:00:00Z",
+					"period": {
+						"by": "",
+						"byFrom": "days",
+						"byTo": "",
+						"field": "",
+						"fromValue": 7,
+						"toValue": null
+					},
+					"toDate": "0001-01-01T00:00:00Z"
+				},
+				"definitionId": "",
+				"fromServerVersion": "5.0.0",
+				"id": "active-incidents-by-role",
+				"isPredefined": true,
+				"itemVersion": "1.2.48",
+				"modified": "2024-03-25T14:36:44.342821976+09:00",
+				"name": "Active Incidents by Role",
+				"packID": "CommonWidgets",
+				"packName": "Common Widgets",
+				"packPropagationLabels": [
+					"all"
+				],
+				"params": {
+					"groupBy": [
+						"roles"
+					]
+				},
+				"prevName": "Active Incidents by Role",
+				"propagationLabels": [],
+				"query": "-category:job and status:active",
+				"shouldCommit": false,
+				"size": 10,
+				"sizeInBytes": 0,
+				"toServerVersion": "",
+				"vcShouldIgnore": false,
+				"vcShouldKeepItemLegacyProdMachine": false,
+				"version": 1,
+				"widgetType": "bar"
+			},
+			"x": 2,
+			"y": 0
+		},
+		{
+			"forceRange": false,
+			"h": 2,
+			"i": "008933a0-ea7c-11ee-ace1-0be912d16c92",
+			"id": "008933a0-ea7c-11ee-ace1-0be912d16c92",
+			"reflectDimensions": true,
+			"w": 2,
+			"widget": {
+				"Cache": null,
+				"cacheVersn": 0,
+				"category": "",
+				"commitMessage": "",
+				"created": "2024-03-25T14:36:41.244436098+09:00",
+				"dataType": "incidents",
+				"dateRange": {
+					"fromDate": "0001-01-01T00:00:00Z",
+					"fromDateLicense": "0001-01-01T00:00:00Z",
+					"period": {
+						"by": "",
+						"byFrom": "days",
+						"byTo": "",
+						"field": "",
+						"fromValue": 7,
+						"toValue": null
+					},
+					"toDate": "0001-01-01T00:00:00Z"
+				},
+				"definitionId": "",
+				"fromServerVersion": "5.0.0",
+				"id": "average-incident-duration-by-role",
+				"isPredefined": true,
+				"itemVersion": "1.2.48",
+				"modified": "2024-03-25T14:36:44.343544139+09:00",
+				"name": "Average Incident Duration by Role (Avg)",
+				"packID": "CommonWidgets",
+				"packName": "Common Widgets",
+				"packPropagationLabels": [
+					"all"
+				],
+				"params": {
+					"groupBy": [
+						"roles"
+					],
+					"keys": [
+						"avg|openDuration / (3600*24)"
+					]
+				},
+				"prevName": "Average Incident Duration by Role (Avg)",
+				"propagationLabels": [],
+				"query": "status:closed",
+				"shouldCommit": false,
+				"size": 5,
+				"sizeInBytes": 0,
+				"toServerVersion": "",
+				"vcShouldIgnore": false,
+				"vcShouldKeepItemLegacyProdMachine": false,
+				"version": 1,
+				"widgetType": "column"
+			},
+			"x": 4,
+			"y": 0
+		}
+	],
+	"locked": false,
+	"modulePage": false,
+	"name": "d",
+	"owner": "",
+	"packID": "",
+	"packName": "",
+	"period": {
+		"by": "",
+		"byFrom": "days",
+		"byTo": "",
+		"field": "",
+		"fromValue": 7,
+		"toValue": null
+	},
+	"propagationLabels": [],
+	"system": false,
+	"toDate": "0001-01-01T00:00:00Z",
+	"toServerVersion": "",
+	"version": -1
+}
