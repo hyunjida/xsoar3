@@ -1,0 +1,623 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Endpoint"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"automation",
+		"incidentfield",
+		"incidenttype",
+		"playbook",
+		"classifier",
+		"widget"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Transform a XSOAR indicator into a Microsoft Defender for Endpoint IOC. The output (at TransformIndicatorToMSDefenderIOC.JsonOutput) is a json representation of the indicators in MSDE format. This json can be the input for the *microsoft-atp-indicator-batch-update* command.",
+				"name": "TransformIndicatorToMSDefenderIOC",
+				"tags": []
+			}
+		],
+		"classifier": [
+			{
+				"description": "",
+				"id": "Microsoft Defender For Endpoint Mapper",
+				"name": "Microsoft Defender For Endpoint Mapper"
+			}
+		],
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": [
+			{
+				"description": "",
+				"name": "Microsoft Defender for Endpoint Evidence Type",
+				"type": "multiSelect"
+			},
+			{
+				"description": "",
+				"name": "Microsoft Defender for Endpoint Evidence Creation Time",
+				"type": "multiSelect"
+			}
+		],
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "Microsoft Defender For Endpoint",
+				"playbook": "",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Endpoint",
+				"commands": [
+					{
+						"description": "Deprecated. Use the microsoft-atp-sc-indicator-create command instead. Creates a network indicator.",
+						"name": "microsoft-atp-indicator-create-network"
+					},
+					{
+						"description": "Retrieves a collection of alerts related to a specific device.",
+						"name": "microsoft-atp-get-machine-alerts"
+					},
+					{
+						"description": "Deprecated. Use the microsoft-atp-sc-indicator-create command instead. Creates a file indicator.",
+						"name": "microsoft-atp-indicator-create-file"
+					},
+					{
+						"description": "Retrieves statistics for a given IP.",
+						"name": "microsoft-atp-get-ip-statistics"
+					},
+					{
+						"description": "Retrieves the domains associated with a specific alert.",
+						"name": "microsoft-atp-get-alert-related-domains"
+					},
+					{
+						"description": "Gets a URI that allows downloading an investigation package.",
+						"name": "microsoft-atp-get-investigation-package-sas-uri"
+					},
+					{
+						"description": "Tests connectivity to Microsoft Defender for Endpoint.",
+						"name": "microsoft-atp-test"
+					},
+					{
+						"description": "Retrieves a collection of machines that have communicated to or from a given domain address.",
+						"name": "microsoft-atp-get-domain-machines"
+					},
+					{
+						"description": "Return the machine's actions. If you set an action ID, it returns the info on the specific action.\nFiltering can be done only on one argument.",
+						"name": "microsoft-atp-list-machine-actions-details"
+					},
+					{
+						"description": "Stop the execution of a file on a machine and delete it.",
+						"name": "microsoft-atp-stop-and-quarantine-file"
+					},
+					{
+						"description": "Retrieves statistics on the given domain.",
+						"name": "microsoft-atp-get-domain-statistics"
+					},
+					{
+						"description": "Retrieves a collection of investigations or retrieves a specific investigation by its ID.",
+						"name": "microsoft-atp-list-investigations"
+					},
+					{
+						"description": "Deprecated. Use the microsoft-atp-sc-indicator-delete command instead. Deletes the specified indicator.",
+						"name": "microsoft-atp-indicator-delete"
+					},
+					{
+						"description": "Retrieves a collection of machines that communicated with WDATP cloud in the last 30 days. Note - only IP or hostname can be a comma-separated list. If both are given as lists, an error will appear.",
+						"name": "microsoft-atp-get-machines"
+					},
+					{
+						"description": "Gets a collection of machines with a given file SHA1 hash.",
+						"name": "microsoft-atp-get-file-related-machines"
+					},
+					{
+						"description": "Generate the login url used for Authorization code flow.",
+						"name": "microsoft-atp-generate-login-url"
+					},
+					{
+						"description": "Detects network connections. When you select a “query_purpose” argument, a designated query template is used.",
+						"name": "microsoft-atp-advanced-hunting-network-connections"
+					},
+					{
+						"description": "Detects evidence of attempted lateral movement. When you select a “query_purpose” argument, a designated query template is used.",
+						"name": "microsoft-atp-advanced-hunting-lateral-movement-evidence"
+					},
+					{
+						"description": "Retrieves a list of machines affected by a vulnerability.",
+						"name": "microsoft-atp-list-machines-by-vulnerability"
+					},
+					{
+						"description": "Retrieves a list of all the vulnerabilities affecting the organization per machine.",
+						"name": "microsoft-atp-list-vulnerabilities-by-machine"
+					},
+					{
+						"description": "Run this command if for some reason you need to rerun the authentication process.",
+						"name": "microsoft-atp-auth-reset"
+					},
+					{
+						"description": "Enable the execution of any application on the machine.",
+						"name": "microsoft-atp-remove-app-restriction"
+					},
+					{
+						"description": "Puts a file from the library to the device. Files are saved in a working folder and are deleted when the device restarts by default.",
+						"name": "microsoft-atp-live-response-put-file"
+					},
+					{
+						"description": "Restricts the execution of all applications on the machine except for a predefined set.",
+						"name": "microsoft-atp-restrict-app-execution"
+					},
+					{
+						"description": "Update the properties of an alert entity.",
+						"name": "microsoft-atp-update-alert"
+					},
+					{
+						"description": "Detects evidence of MSDE agent/sensor manipulation.",
+						"name": "microsoft-atp-advanced-hunting-tampering"
+					},
+					{
+						"description": "Detects evidence of persistence. When you select a “query_purpose” argument, a designated query template is used.",
+						"name": "microsoft-atp-advanced-hunting-persistence-evidence"
+					},
+					{
+						"description": "Retrieve a list of device references that has this software installed.",
+						"name": "microsoft-atp-list-machines-by-software"
+					},
+					{
+						"description": "Retrieves the files associated with a specific alert.",
+						"name": "microsoft-atp-get-alert-related-files"
+					},
+					{
+						"description": "Undo an isolation of a machine.",
+						"name": "microsoft-atp-unisolate-machine"
+					},
+					{
+						"description": "Detects evidence of privilege escalation.",
+						"name": "microsoft-atp-advanced-hunting-privilege-escalation"
+					},
+					{
+						"description": "Lists all indicators by the ID that the system creates when the indicator is ingested.",
+						"name": "microsoft-atp-sc-indicator-list"
+					},
+					{
+						"description": "Gets an indicator by its ID.",
+						"name": "microsoft-atp-sc-indicator-get-by-id"
+					},
+					{
+						"description": "Retrieves missing KBs (security updates) by software ID.",
+						"name": "microsoft-atp-list-missing-kb-by-software"
+					},
+					{
+						"description": "Creates a new alert entity using event data, as obtained from the Advanced Hunting.",
+						"name": "microsoft-atp-create-alert"
+					},
+					{
+						"description": "Deprecated. Use the microsoft-atp-sc-indicator-list command instead. Lists all indicators by the ID that the system creates when the indicator is ingested.",
+						"name": "microsoft-atp-indicator-list"
+					},
+					{
+						"description": "Allows you to run programmatic queries like in Microsoft Defender ATP Portal (https://securitycenter.windows.com/hunting). Limitations: You can only run a query on data from the last 30 days. The results include a maximum of 10,000 rows. The number of executions is limited (up to 15 calls per minute, 15 minutes of running time every hour and 4 hours of running time a day).",
+						"name": "microsoft-atp-advanced-hunting"
+					},
+					{
+						"description": "Cancels an action with an unfinished status.",
+						"name": "microsoft-atp-live-response-cancel-action"
+					},
+					{
+						"description": "Deprecated. Use the microsoft-atp-sc-indicator-get-by-id command instead. Gets an indicator by its ID.",
+						"name": "microsoft-atp-indicator-get-by-id"
+					},
+					{
+						"description": "Runs a script from the library on a device. The Args parameter is passed to your script. Timeouts after 10 minutes.",
+						"name": "microsoft-atp-live-response-run-script"
+					},
+					{
+						"description": "Retrieves the organization software inventory.",
+						"name": "microsoft-atp-list-software"
+					},
+					{
+						"description": "Retrieves a collection of alerts related to a given file hash.",
+						"name": "microsoft-atp-get-file-alerts"
+					},
+					{
+						"description": "Adds or removes a tag on a specific machine.",
+						"name": "microsoft-atp-add-remove-machine-tag"
+					},
+					{
+						"description": "Retrieves the user associated with a specific alert.",
+						"name": "microsoft-atp-get-alert-related-user"
+					},
+					{
+						"description": "Isolates a machine from accessing external networks.",
+						"name": "microsoft-atp-isolate-machine"
+					},
+					{
+						"description": "Retrieves file information by a file hash (SHA1 or SHA256).",
+						"name": "microsoft-atp-get-file-info"
+					},
+					{
+						"description": "Starts an automated investigation on a machine.",
+						"name": "microsoft-atp-start-investigation"
+					},
+					{
+						"description": "Gets machines that have communicated with Microsoft Defender for Endpoint cloud. At least one of the following arguments is required - IP, hostname, or ID. Otherwise, an error appears.",
+						"name": "endpoint"
+					},
+					{
+						"description": "Updates the specified indicator.",
+						"name": "microsoft-atp-sc-indicator-update"
+					},
+					{
+						"description": "Collect an investigation package from a machine.",
+						"name": "microsoft-atp-collect-investigation-package"
+					},
+					{
+						"description": "Retrieves a list of your organization's software version distribution.",
+						"name": "microsoft-atp-list-software-version-distribution"
+					},
+					{
+						"description": "Retrieves a collection of alerts related to a given IP address.",
+						"name": "microsoft-atp-get-ip-alerts"
+					},
+					{
+						"description": "Indicates how the file got on the machine. Possible details are \"dropped_file\" - Was the file dropped? From where? \"created_file\" - Created by another File (script, compiled binary). \"network_shared\" - Shared via network. \"execution_chain\" - What is the process execution chain.",
+						"name": "microsoft-atp-advanced-hunting-file-origin"
+					},
+					{
+						"description": "Deprecated. Use the microsoft-atp-sc-indicator-update command instead. Updates the specified indicator.",
+						"name": "microsoft-atp-indicator-update"
+					},
+					{
+						"description": "Collect and download an investigation package from a machine.",
+						"name": "microsoft-atp-request-and-download-investigation-package"
+					},
+					{
+						"description": "Retrieves a collection of alerts related to a given user ID.",
+						"name": "microsoft-atp-get-user-alerts"
+					},
+					{
+						"description": "Retrieves the IPs associated with a specific alert.",
+						"name": "microsoft-atp-get-alert-related-ips"
+					},
+					{
+						"description": "Retrieves a list of all the vulnerabilities affecting the organization per software.",
+						"name": "microsoft-atp-list-vulnerabilities-by-software"
+					},
+					{
+						"description": "Creates a new indicator.",
+						"name": "microsoft-atp-sc-indicator-create"
+					},
+					{
+						"description": "Retrieves a specific alert by the given alert ID.",
+						"name": "microsoft-atp-get-alert-by-id"
+					},
+					{
+						"description": "Gets a list of alerts present on the system. Filtering can be done only on a single argument.",
+						"name": "microsoft-atp-list-alerts"
+					},
+					{
+						"description": "Collects a file from a device. Note: Backslashes in the path must be escaped.",
+						"name": "microsoft-atp-live-response-get-file"
+					},
+					{
+						"description": "Retrieves statistics for the given file.",
+						"name": "microsoft-atp-get-file-statistics"
+					},
+					{
+						"description": "Deletes the specified indicator.",
+						"name": "microsoft-atp-sc-indicator-delete"
+					},
+					{
+						"description": "Updates a batch of indicators. If an indicator does not exist, a new indicator is created.",
+						"name": "microsoft-atp-indicator-batch-update"
+					},
+					{
+						"description": "Retrieves a collection of logged on users on a specific device.",
+						"name": "microsoft-atp-get-machine-users"
+					},
+					{
+						"description": "Offboard a machine from defender.",
+						"name": "microsoft-atp-offboard-machine"
+					},
+					{
+						"description": "Retrieves a collection of alerts related to a given domain address.",
+						"name": "microsoft-atp-get-domain-alerts"
+					},
+					{
+						"description": "Get a machine's details by its identity.",
+						"name": "microsoft-atp-get-machine-details"
+					},
+					{
+						"description": "Initiate a Microsoft Defender Antivirus scan on a machine.",
+						"name": "microsoft-atp-run-antivirus-scan"
+					},
+					{
+						"description": "Detects process details. When you select a “query_purpose” argument, a designated query template is used.",
+						"name": "microsoft-atp-advanced-hunting-process-details"
+					},
+					{
+						"description": "Detects cover up actions. When you select a “query_purpose” argument, a designated query template is used.",
+						"name": "microsoft-atp-advanced-hunting-cover-up"
+					},
+					{
+						"description": "Retrieves a list of all vulnerabilities.",
+						"name": "microsoft-atp-list-vulnerabilities"
+					},
+					{
+						"description": "Gets a result file for a specified action.",
+						"name": "microsoft-atp-live-response-result"
+					},
+					{
+						"description": "Retrieves a collection of machines related to a given user ID.",
+						"name": "microsoft-atp-get-user-machines"
+					}
+				],
+				"description": "Microsoft Defender for Endpoint (previously Microsoft Defender Advanced Threat Protection (ATP)) is a unified platform for preventative protection, post-breach detection, automated investigation, and response.",
+				"id": "Microsoft Defender Advanced Threat Protection",
+				"name": "Microsoft Defender for Endpoint"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": [
+			{
+				"description": "This playbook accepts an endpoint ID, IP, or host name and isolates it using the Microsoft Defender For Endpoint integration.",
+				"name": "Microsoft Defender For Endpoint - Isolate Endpoint"
+			},
+			{
+				"description": "This playbook is part of the ‘Malware Investigation And Response’ pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook uses the Live Response feature to retrieve a file from an endpoint. The playbook supports a supplied machine id as an input. Otherwise, it will take the Device ID incident field.\nThe playbook supports only one element to be retrieved for each task (if needed more then one - use the playbook loop feature).",
+				"name": "MDE - Retrieve File"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook uses the Microsoft Defender For Endpoint Advanced Hunting feature to hunt for host PowerShell executions.",
+				"name": "MDE - Host Advanced Hunting For Powershell Executions"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis Playbook handles closing a true positive incident for Microsoft Defender for Endpoint.",
+				"name": "MDE - True Positive Incident Handling"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook uses the Microsoft Defender For Endpoint Advanced Hunting feature to hunt for host persistence evidence.",
+				"name": "MDE - Host Advanced Hunting For Persistence"
+			},
+			{
+				"description": "This playbook simplifies retrieving investigation packages to Cortex XSOAR from supported machines (See https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/collect-investigation-package?view=o365-worldwide). \n\n The playbook receives information about the target devices (host name, IP, and device ID), validates the devices exist, and retrieves the collection package from those machines into the Cortex XSOAR console. \n Note: This action may take time, the average package size is around ~15 MB.",
+				"name": "Microsoft Defender For Endpoint - Collect investigation package"
+			},
+			{
+				"description": "This playbook accepts an endpoint ID, IP, or host name and unisolates it using the Microsoft Defender For Endpoint integration.",
+				"name": "Microsoft Defender For Endpoint - Unisolate Endpoint"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook enriches Microsoft Defender For Endpoint alerts. The enrichment is done on the involved endpoint and Mitre technique ID information, and it sets the 'Malware-Investigation and Response' layout.",
+				"name": "MDE Malware - Incident Enrichment"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook investigates Microsoft Defender For Endpoint malware alerts. It uses - Microsoft Defender For Endpoint Advanced Hunting - Command Line Analysis - Deduplication - Sandbox hash search and detonation - Proactive investigation actions (AV scan, investigation package collection, running automated investigation on an endpoint) - Microsoft Defender For Endpoint alert enrichment - Incident handling (true/false positive)",
+				"name": "MDE Malware - Investigation and Response"
+			},
+			{
+				"description": "This playbook will search a file or process activity of a software by a given image file name using Microsoft Defender For Endpoint. The analyst can then choose the files to block.",
+				"name": "MDE - Search And Block Software"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook handles closing false positive incidents for Microsoft Defender for Endpoint.",
+				"name": "MDE - False Positive Incident Handling"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook supports investigation actions for the analyst, including:\n- Running a full AV scan for a specific endpoint\n- Requesting an investigation package (a zip file containing forensic data with a size of ~ 15MB) from an endpoint.\n- Requesting to run automatic investigation on an endpoint.\n",
+				"name": "MDE - Pro-Active Actions"
+			},
+			{
+				"description": "This playbook is a generic playbook that receives a process name and a command-line argument. It uses the \"Microsoft Defender For Endpoint\" integration to search for the given process executions and compares the command-line argument from the results to the command-line argument received from the playbook input.\n\nNote: Under the \"Processes\", input the playbook should receive an array that contains the following keys:\n- value: *process name*\n- commands: *command-line arguments*",
+				"name": "MDE - Search and Compare Process Executions"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook uses the Microsoft Defender For Endpoint Advanced Hunting feature based on the provided inputs.",
+				"name": "MDE - Host Advanced Hunting"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook uses the Microsoft Defender For Endpoint Advanced Hunting feature to hunt for host network activity.",
+				"name": "MDE - Host Advanced Hunting For Network Activity"
+			},
+			{
+				"description": "This playbook is part of the 'Malware Investigation And Response' pack. For more information, refer to https://xsoar.pan.dev/docs/reference/packs/malware-investigation-and-response.\nThis playbook handles incident ingestion from a SIEM. The user provides the incident fields containing the alert ID. This playbook also enables changing the severity according to a user-defined scale to override the default assigned severity.",
+				"name": "MDE SIEM ingestion - Get Incident Data"
+			},
+			{
+				"description": "This playbook used generic polling to get machine action information.",
+				"name": "Microsoft Defender Advanced Threat Protection Get Machine Action Status"
+			},
+			{
+				"description": "This playbook receives an MD5 or a SHA256 hash and adds it to the block list in Microsoft Defender for Endpoint. \nThe playbook uses the integration \"Microsoft Defender for Endpoint\".",
+				"name": "MDE - Block File"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": [
+			{
+				"name": "API Call Results for Microsoft Defender for Endpoint"
+			}
+		],
+		"wizard": null
+	},
+	"currentVersion": "1.16.29",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.35",
+			"name": "Base"
+		},
+		"CommonPlaybooks": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "2.6.15",
+			"name": "Common Playbooks"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.14.3",
+			"name": "Common Scripts"
+		},
+		"CommonTypes": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "3.4.2",
+			"name": "Common Types"
+		},
+		"FeedMitreAttackv2": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.1.29",
+			"name": "MITRE ATT\u0026CK"
+		},
+		"FiltersAndTransformers": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.2.61",
+			"name": "Filters And Transformers"
+		},
+		"Jira": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "3.1.10",
+			"name": "Atlassian Jira"
+		},
+		"Malware": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "1.4.11",
+			"name": "Malware Core"
+		},
+		"MalwareInvestigationAndResponse": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "2.0.12",
+			"name": "Malware Investigation and Response"
+		},
+		"ServiceNow": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "2.5.55",
+			"name": "ServiceNow"
+		},
+		"WindowsDefenderAdvancedThreatProtection": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "1.0.4",
+			"name": "Windows Defender Advanced Threat Protection (Deprecated)"
+		}
+	},
+	"deprecated": false,
+	"description": "Microsoft Defender for Endpoint (previously Microsoft Defender Advanced Threat Protection (ATP)) is a unified platform for preventative protection, post-breach detection, automated investigation, and response.",
+	"disabledMonthly": false,
+	"downloads": 16889,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "MicrosoftDefenderAdvancedThreatProtection",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/MicrosoftDefenderAdvancedThreatProtection/MicrosoftDefenderAdvancedThreatProtection_image.png",
+			"name": "Microsoft Defender for Endpoint"
+		},
+		{
+			"imagePath": "content/packs/ServiceNow/ServiceNow_image.png",
+			"name": "ServiceNow (Deprecated)"
+		},
+		{
+			"imagePath": "content/packs/ServiceNow/ServiceNowCMDB_image.png",
+			"name": "ServiceNow CMDB"
+		},
+		{
+			"imagePath": "content/packs/ServiceNow/ServiceNowIAM_image.png",
+			"name": "ServiceNow IAM"
+		},
+		{
+			"imagePath": "content/packs/ServiceNow/ServiceNowv2_image.png",
+			"name": "ServiceNow v2"
+		},
+		{
+			"imagePath": "content/packs/FeedMitreAttackv2/MITREATT%26CKv2_image.png",
+			"name": "MITRE ATT\u0026CK"
+		},
+		{
+			"imagePath": "content/packs/Jira/jira-v2_image.png",
+			"name": "Atlassian Jira v2"
+		},
+		{
+			"imagePath": "content/packs/Jira/jira-v2_image.png",
+			"name": "Atlassian Jira v2 (Deprecated)"
+		},
+		{
+			"imagePath": "content/packs/Jira/JiraV3_image.png",
+			"name": "Atlassian Jira v3"
+		},
+		{
+			"imagePath": "content/packs/WindowsDefenderAdvancedThreatProtection/WindowsDefenderAdvancedThreatProtection_image.png",
+			"name": "Windows Defender Advanced Threat Protection (Deprecated)"
+		}
+	],
+	"itemVersion": "1.16.29",
+	"keywords": [],
+	"legacy": true,
+	"name": "Microsoft Defender for Endpoint",
+	"packID": "MicrosoftDefenderAdvancedThreatProtection",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "Use Microsoft Defender for Endpoint (previously Microsoft Defender Advanced Threat Protection (ATP)) to deliver industry-leading endpoint security for Windows, macOS, Linux, Android, iOS, and network devices. It helps to rapidly stop attacks, scale your security resources, and evolve your defenses. Microsoft Defender for Endpoint is an enterprise endpoint security platform designed to help enterprise networks prevent, detect, investigate, and respond to advanced threats.\n\n## Integration capabilities:\n\nMicrosoft Defender for Endpoint allows you to perform preventative protection, post-breach detection, automated investigation, and response.\nMicrosoft Defender for Endpoint delivers continuous asset visibility, intelligent risk-based assessments, and built-in remediation tools to help your security and IT teams prioritize and address critical vulnerabilities and misconfigurations across your organization.\n\n## What does this pack do?\n\n- Receives alerts from Microsoft Defender for Endpoint as XSOAR incidents\n- Enriches IOCs from XSOAR to Microsoft Defender for Endpoint and vice versa\n- Allows remediation actions for connected endpoints\n- Provides investigation capabilities on connected assets\n- Allows asset visibility, status, and health (vulnerability assessment) \n\n## Content Pack components\n\n- The Microsoft Defender for Endpoint integration imports events as XSOAR incidents.\n- The Microsoft Defender Advanced Threat Protection Get Machine Action Status playbook uses generic polling to get machine action information (relevant for Cortex XSOAR v6.2 and earlier).\n- The Microsoft Defender for Endpoint - Isolate Endpoint playbook accepts an endpoint ID, IP address, or hostname and isolates it using the Microsoft Defender for Endpoint integration (relevant for Cortex XSOAR v6.2 and earlier).\n- The Microsoft Defender for Endpoint - Unisolate Endpoint playbook accepts an endpoint ID, IP address, or hostname and unisolates it using the Microsoft Defender for Endpoint integration (relevant for Cortex XSOAR v6.2 and earlier).\n\n## Authentication\n\nFor more details about the authentication used for components in this content pack, see [Microsoft Integrations - Authentication](https://xsoar.pan.dev/docs/reference/articles/microsoft-integrations---authentication).\n\n### Endpoint URL\n\n\n| **Environment Type** | **Endpoint URL**                            |\n|--------------------------|---------------------------------------------|\n | Worldwide                | \u003chttps://api.securitycenter.microsoft.com\u003e    |\n | Us Geo Proximity         | \u003chttps://api.securitycenter.microsoft.com\u003e    |\n | Eu Geo Proximity         | \u003chttps://api-eu.securitycenter.microsoft.com\u003e |\n | UK Geo Proximity         | \u003chttps://api-uk.securitycenter.microsoft.com\u003e |\n | Us GCC                   | \u003chttps://api-gcc.securitycenter.microsoft.us\u003e |\n | Us GCC-High              | \u003chttps://api-gcc.securitycenter.microsoft.us\u003e |\n | DoD                      | \u003chttps://api-gov.securitycenter.microsoft.us\u003e |\n\nTo find the appropriate Endpoint URI, use the following resources:\n\n- For Worldwide or Geo Proximity URLs, see [Supported Microsoft 365 Defender APIs](https://learn.microsoft.com/en-us/microsoft-365/security/defender/api-supported?view=o365-worldwide#endpoint-uris)\n- For Us Government \u0026 DoD URLs, see [Microsoft Defender for Endpoint for US Government customers](https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/gov?view=o365-worldwide#api)\n\n## Log ingestion\n\nNote: In order to parse the timestamp correctly, make sure that the timestamp field is in UTC time zone (timestamp ends with \"Z\").\nThe supported time format are yyyy-MM-ddThh:mm:%E3S (2021-12-08 10:00:00.123Z) or yyyy-MM-ddThh:mm:ss (2021-07-01T10:00:00Z). The relevant field is \"lastEventTime\".\n\n\n## Licence information\n\nAvailable for E3, E5, and standalone licenses.\n",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2024-03-01T05:26:56+09:00",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "860237",
+	"videos": []
+}
