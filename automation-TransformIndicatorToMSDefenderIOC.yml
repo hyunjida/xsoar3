@@ -1,0 +1,240 @@
+args:
+- description: The indicators query.
+  name: query
+  required: true
+- auto: PREDEFINED
+  description: The action that will be taken if the indicator will be discovered in
+    the organization.
+  name: action
+  predefined:
+  - Warn
+  - Block
+  - Audit
+  - Alert
+  - AlertAndBlock
+  - BlockAndRemediate
+  - Allowed
+  required: true
+- defaultValue: "10000"
+  description: The maximum number of indicators to fetch.
+  name: limit
+- defaultValue: "0"
+  description: The results offset page. Only change when the number of the results
+    exceed the limit.
+  name: offset
+comment: Transform a XSOAR indicator into a Microsoft Defender for Endpoint IOC. The
+  output (at TransformIndicatorToMSDefenderIOC.JsonOutput) is a json representation
+  of the indicators in MSDE format. This json can be the input for the *microsoft-atp-indicator-batch-update*
+  command.
+commonfields:
+  id: TransformIndicatorToMSDefenderIOC
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.16.29
+    packID: MicrosoftDefenderAdvancedThreatProtection
+    packName: Microsoft Defender for Endpoint
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.83255
+engineinfo: {}
+mainengineinfo: {}
+name: TransformIndicatorToMSDefenderIOC
+outputs:
+- contextPath: TransformIndicatorToMSDefenderIOC.JsonOutput
+  description: Json output of the indicators. Should be the input for the *microsoft-atp-indicator-batch-update*.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.indicatorValue
+  description: The value of the Indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.indicatorType
+  description: 'Type of the indicator. Possible values are: FileSha1, FileSha256,
+    FileMd5, CertificateThumbprint, IpAddress, DomainName, Url.'
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.lastUpdateTime
+  description: The last time the indicator was updated.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.lastUpdatedBy
+  description: Identity of the user/application that last updated the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.action
+  description: 'The action that will be taken if the indicator will be discovered
+    in the organization. Possible values are: "Warn", "Block", "Audit", "Alert", "AlertAndBlock",
+    "BlockAndRemediate" and "Allowed".'
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.title
+  description: Indicator title.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.expirationTime
+  description: The expiration time of the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.description
+  description: Description of the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.creationTimeDateTimeUtc
+  description: The date and time when the indicator was created.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.Severity
+  description: 'The severity of the indicator. possible values are: Informational,
+    Low, Medium and High.'
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.application
+  description: The application associated with the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.externalID
+  description: Id the customer can submit in the request for custom correlation.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.sourceType
+  description: User in case the Indicator created by a user. "AadApp" in case it submitted
+    using automated application via the API.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.createdBySource
+  description: The name of the user or application that submitted the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.createdBy
+  description: Unique identity of the user or application that submitted the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.recommendedActions
+  description: Recommended actions for the indicator.
+  type: String
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.rbacGroupNames
+  description: RBAC device group names where the indicator is exposed and active.
+    Empty list in case it exposed to all devices.
+  type: Unknown
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.rbacGroupIds
+  description: RBAC device group ID's where the indicator is exposed and active. Empty
+    list in case it exposed to all devices.
+  type: Unknown
+- contextPath: TransformIndicatorToMSDefenderIOC.Indicators.generateAlert
+  description: True if alert generation is required, False if this indicator should
+    not generate an alert.
+  type: String
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('TransformIndicatorToMSDefenderIOC', 'start', __line__())
+  ### pack version: 1.16.29
+
+
+  POPULATE_INDICATOR_FIELDS = ["value", "indicator_type", "applications", "user", "firstSeen",
+                               "expiration", "lastSeen", "score", "title", "description"]
+
+  INDICATOR_FIELDS_TO_MS_DEFENDER_IOC = {
+      "value": "indicatorValue",
+      "indicator_type": "indicatorType",
+      "applications": "application",
+      "user": "createdBy",
+      "firstSeen": "creationTimeDateTimeUtc",
+      "expiration": "expirationTime",
+      "lastSeen": "lastUpdateTime",
+      "score": "Severity",
+      "title": "title",
+      "description": "description",
+      # enter (hard-coded) your wanted indicator arguments per MS docs (make sure to remove the '#'):
+      # {https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/ti-indicator?view=o365-worldwide} ##
+      # "" : "externalID",
+      # "" : "sourceType",
+      # "" : "lastUpdatedBy",
+      # "" : "recommendedActions",
+      # "" : "rbacGroupNames",
+      # "" : "rbacGroupIds",
+      # "" : "generateAlert",
+      # "" : "createdBySource",
+  }
+
+  # feel free to change it hard-coded.
+  # Possible values in MS Defender are: Informational, Low, Medium and High
+  DBOT_SCORE_TO_MS_DEFENDER_SEVERITY = {
+      Common.DBotScore.BAD: "High",
+      Common.DBotScore.SUSPICIOUS: "Medium",
+      Common.DBotScore.GOOD: "Informational",
+      Common.DBotScore.NONE: "Informational",
+  }
+
+
+  def convert_unique_fields(ioc, action):
+      ioc['Severity'] = DBOT_SCORE_TO_MS_DEFENDER_SEVERITY[ioc.get('Severity')]  # XSOAR indicators always have score
+      if ioc.get('indicatorType'):
+          indicator_type = ioc.get('indicatorType')
+          indicator_value = ioc.get('indicatorValue', "")
+          if indicator_type == 'File':
+              hash_type = get_hash_type(indicator_value)
+              if hash_type == 'md5':
+                  ioc["indicatorType"] = "FileMd5"
+              elif hash_type == 'sha1':
+                  ioc["indicatorType"] = "FileSha1"
+              if hash_type == 'sha256':
+                  ioc["indicatorType"] = "FileSha256"
+          elif indicator_type == "IP":
+              ioc["indicatorType"] = "IpAddress"
+          elif indicator_type == "DOMAIN":
+              ioc["indicatorType"] = "DomainName"
+          elif indicator_type == "URL":
+              ioc["indicatorType"] = "Url"
+          else:
+              raise DemistoException(f"The indicator type: {indicator_type} does not exist in MS Defender")
+      # if you want to map the action field, you can do it here.
+      # Note: the action arg is mandatory with MS Defender api
+      # Possible values are: "Warn", "Block", "Audit", "Alert", "AlertAndBlock", "BlockAndRemediate" and "Allowed".
+      ioc['action'] = action
+      # Note: the title arg is mandatory with MS Defender api, please change it
+      if not ioc.get('title'):
+          ioc['title'] = "XSOAR Indicator title"
+      # Note: the description arg is mandatory with MS Defender api, please change it
+      if not ioc.get('description'):
+          ioc['description'] = "XSOAR Indicator description"
+      return ioc
+
+
+  def get_indicators_by_query():
+      action = demisto.args().pop('action')
+      demisto.args().update({'populateFields': POPULATE_INDICATOR_FIELDS})
+      indicators = execute_command('GetIndicatorsByQuery', args=demisto.args())
+      ms_defender_iocs = []
+      if indicators:
+          for indicator in indicators:
+              # convert XSOAR indicator to MS Defender IOC
+              ms_defender_ioc = {INDICATOR_FIELDS_TO_MS_DEFENDER_IOC[indicator_field]: indicator_value for
+                                 (indicator_field, indicator_value) in indicator.items()}
+              ms_defender_ioc = convert_unique_fields(ms_defender_ioc, action)
+              ms_defender_iocs.append(ms_defender_ioc)
+      return ms_defender_iocs
+
+
+  def main():
+      try:
+          ms_defender_iocs = get_indicators_by_query()
+          human_readable = tableToMarkdown('TransformIndicatorToMSDefenderIOC is done:',
+                                           ms_defender_iocs, removeNull=True,
+                                           headers=list(INDICATOR_FIELDS_TO_MS_DEFENDER_IOC.values()))
+          context = {
+              'TransformIndicatorToMSDefenderIOC.JsonOutput': json.dumps(ms_defender_iocs),
+              'TransformIndicatorToMSDefenderIOC.Indicators': ms_defender_iocs,
+          }
+          demisto.results({
+              'Type': entryTypes['note'],
+              'ContentsFormat': formats['text'],
+              'Contents': ms_defender_iocs,
+              'EntryContext': context,
+              'HumanReadable': human_readable,
+          })
+
+      except Exception as ex:
+          return_error(f'Failed to execute TransformIndicatorToMSDefenderIOC. Error: {str(ex)}')
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+  register_module_line('TransformIndicatorToMSDefenderIOC', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags: []
+type: python
