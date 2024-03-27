@@ -1,0 +1,359 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.2.0
+    itemVersion: 1.16.29
+    packID: MicrosoftDefenderAdvancedThreatProtection
+    packName: Microsoft Defender for Endpoint
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: "This playbook simplifies retrieving investigation packages to Cortex
+  XSOAR from supported machines (See https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/collect-investigation-package?view=o365-worldwide).
+  \n\n The playbook receives information about the target devices (host name, IP,
+  and device ID), validates the devices exist, and retrieves the collection package
+  from those machines into the Cortex XSOAR console. \n Note: This action may take
+  time, the average package size is around ~15 MB."
+id: Microsoft Defender For Endpoint - Collect investigation package
+inputs:
+- description: Choose True to skip user validation on retrieving the investigation
+    pack within the provided assets.
+  key: AutoCollectinvestigationPackege
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+- description: A comma-separated list of host names.
+  key: Hostnames
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: A comma-separated list of machine IDs.
+  key: MachineIDs
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: A comma-separated list of machine IPs.
+  key: IPs
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: Microsoft Defender For Endpoint - Collect investigation package
+outputs:
+- contextPath: MicrosoftATP.MachineAction
+  description: Microsoft Defender For Endpoint machine action details.
+  type: unknown
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 330a925b-ea1a-497f-8452-40f64c77bf99
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 330a925b-ea1a-497f-8452-40f64c77bf99
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": -57.5,
+          "y": 90
+        }
+      }
+  "2":
+    conditions:
+    - condition:
+      - - ignorecase: true
+          left:
+            iscontext: true
+            value:
+              simple: inputs.AutoCollectinvestigationPackege
+          operator: isEqualString
+          right:
+            value:
+              simple: "True"
+      label: "yes"
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "11"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Run investigation package auto collection?
+      id: af8bdb83-23b7-4a66-8e78-9b46f5a423e7
+      iscommand: false
+      name: Run auto collection of investigation package?
+      type: condition
+      version: -1
+    taskid: af8bdb83-23b7-4a66-8e78-9b46f5a423e7
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 390,
+          "y": 545
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    message:
+      bcc: null
+      body:
+        simple: Approve isolation
+      cc: null
+      format: ""
+      methods: []
+      replyOptions:
+      - "Yes"
+      - "No"
+      subject: null
+      timings:
+        completeafterreplies: 1
+        completeaftersla: false
+        completeafterv2: false
+        retriescount: 2
+        retriesinterval: 360
+      to: null
+    nexttasks:
+      "No":
+      - "8"
+      "Yes":
+      - "11"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Approves investigation package collection.
+      id: e6035f10-d52c-484c-8098-f7cf71f40b2d
+      iscommand: false
+      name: Approve Investigation package collection
+      type: condition
+      version: -1
+    taskid: e6035f10-d52c-484c-8098-f7cf71f40b2d
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 150,
+          "y": 730
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      hostname:
+        simple: ${inputs.Hostnames}
+      id:
+        simple: ${inputs.MachineIDs}
+      ip:
+        simple: ${inputs.IPs}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Microsoft Defender Advanced Threat Protection
+      description: "Gets machines that communicated with Microsoft Defender for Endpoint
+        cloud. At least one of the following arguments is required: \n - IP \n - host
+        name \n - ID \n Otherwise, an error appears."
+      id: 892afad3-2682-4f32-83b1-5c59e41daba9
+      iscommand: true
+      name: Validate endpoint input
+      script: Microsoft Defender Advanced Threat Protection|||endpoint
+      type: regular
+      version: -1
+    taskid: 892afad3-2682-4f32-83b1-5c59e41daba9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -57.5,
+          "y": 215
+        }
+      }
+  "7":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Endpoint.ID
+          operator: isNotEmpty
+          right:
+            value: {}
+      - - ignorecase: true
+          left:
+            iscontext: true
+            value:
+              simple: Endpoint.OS
+          operator: containsString
+          right:
+            value:
+              simple: windows
+      label: "yes"
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "8"
+      "yes":
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Are there any Windows machine IDs?
+      id: 5b7b0285-4be7-4cba-8169-903c3df3444b
+      iscommand: false
+      name: Are there any windows machine IDs?
+      type: condition
+      version: -1
+    taskid: 5b7b0285-4be7-4cba-8169-903c3df3444b
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": -57.5,
+          "y": 370
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: bf39b6ec-61f0-4263-8781-4b4a1b8f1232
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: bf39b6ec-61f0-4263-8781-4b4a1b8f1232
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": -57.5,
+          "y": 1100
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    evidencedata:
+      customfields: {}
+      description:
+        simple: Investigation Package from the Device ID- ${Endpoint.ID}
+      tags:
+        simple: Investigation Package
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      comment:
+        simple: 'XSOAR - Collect Investigation Package - inc #${incident.ID}'
+      interval_in_seconds:
+        simple: "20"
+      machine_id:
+        complex:
+          accessor: ID
+          root: Endpoint
+          transformers:
+          - operator: uniq
+      timeout_in_seconds:
+        simple: "900"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Microsoft Defender Advanced Threat Protection
+      description: Collects and downloads an investigation package from a machine.
+      id: 87f341c2-660a-47ea-83d0-f85c8ec17cf5
+      iscommand: true
+      name: Collect and download the forensics package
+      script: Microsoft Defender Advanced Threat Protection|||microsoft-atp-request-and-download-investigation-package
+      type: regular
+      version: -1
+    taskid: 87f341c2-660a-47ea-83d0-f85c8ec17cf5
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 390,
+          "y": 910
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1075,
+        "width": 827.5,
+        "x": -57.5,
+        "y": 90
+      }
+    }
+  }
